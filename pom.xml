@@ -1,0 +1,73 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.bskyb.cbs.sdlc</groupId>
+    <artifactId>homme-bot</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <name>Slack Homme Bot</name>
+    <description>Implementation of the Homme game written by Ben Kelley for Slack.</description>
+
+    <scm>
+        <connection>scm:git@github.com:dgrierso/SlackBots.git</connection>
+        <developerConnection>scm:git:git@github.com:dgrierso/SlackBots.git</developerConnection>
+        <url>git:https://github.com/dgrierso/SlackBots.git</url>
+    </scm>
+
+    <properties>
+        <log4j.version>2.6.2</log4j.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <developers>
+        <developer>
+            <id>dgrierso</id>
+            <email>david(at)grierson.org.uk</email>
+            <name>David Grierson</name>
+            <url>http://about.me/davidgrierson</url>
+        </developer>
+    </developers>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
+        </license>
+    </licenses>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.ullink.slack</groupId>
+            <artifactId>simpleslackapi</artifactId>
+            <version>0.6.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-classic</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+    </dependencies>
+
+</project>
