@@ -21,6 +21,8 @@ public class HommeBot {
     private SlackSession session;
     private boolean running = false;
     
+    private SlackChannel channel;
+    
     public HommeBot() throws HommeBotException {
         this(Paths.get(DEFAULT_PROPERTIES_FILE));
     }
@@ -36,10 +38,12 @@ public class HommeBot {
 
         }
         
-        session = SlackSessionFactory.createWebSocketSlackSession("my-bot-auth-token");
+        session = SlackSessionFactory.createWebSocketSlackSession(hommeProperties.getProperty("auth-token"));
         this.connect();
         
-        //session.addMessagePostedListener(arg0);
+        channel = session.findChannelByName(hommeProperties.getProperty("channel"));
+        
+        session.addMessagePostedListener(new MessagePostedListener(this));
         
         running = true;
     }
@@ -60,6 +64,10 @@ public class HommeBot {
 
     public boolean isRunning() {
         return running;
+    }
+
+    public SlackChannel getChannel() {
+        return channel;
     }
     
     

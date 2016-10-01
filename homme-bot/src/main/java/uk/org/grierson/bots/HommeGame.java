@@ -7,7 +7,7 @@ public class HommeGame {
     private static HommeBot bot;
     
     public static void main(String[] args) {
-        LOGGER.trace("Starting HommeGame");
+        LOGGER.info("Starting HommeGame");
         
         try {
             bot = new HommeBot();
