@@ -17,8 +17,9 @@ public class HommeBot {
     private static final String DEFAULT_PROPERTIES_FILE = "src/main/resources/homme.properties";
     private static final Logger LOGGER = LogManager.getLogger(HommeBot.class);
 
-    private Properties hommeProperties;
+    private Properties hommeProperties = new Properties();
     private SlackSession session;
+    private boolean running = false;
     
     public HommeBot() throws HommeBotException {
         this(Paths.get(DEFAULT_PROPERTIES_FILE));
@@ -40,6 +41,7 @@ public class HommeBot {
         
         //session.addMessagePostedListener(arg0);
         
+        running = true;
     }
 
     private void connect() throws HommeBotException {
@@ -54,6 +56,10 @@ public class HommeBot {
         else {
             throw new HommeBotException("Session not yet initialised");
         }
+    }
+
+    public boolean isRunning() {
+        return running;
     }
     
     

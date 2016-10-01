@@ -11,8 +11,12 @@ public class HommeGame {
         
         try {
             bot = new HommeBot();
+            
+            while ( bot.isRunning() ) {
+                Thread.sleep(1000);
+            }
         }
-        catch ( HommeBotException e ) {
+        catch ( HommeBotException | InterruptedException e ) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
