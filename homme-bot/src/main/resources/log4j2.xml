@@ -10,5 +10,7 @@
     <Root level="trace">
       <AppenderRef ref="Console"/>
     </Root>
+    
+    <Logger name="com.ullink.slack.simpleslackapi" level="info" additivity="false"/>
   </Loggers>
 </Configuration>
