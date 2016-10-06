@@ -17,8 +17,7 @@ public class HommeBot extends SingleChannelBotService {
         super(channel, Paths.get(HOMME_PROPERTIES_FILE));
         
         LOGGER.info("Started HommeBot on [" + channel + "]");
-        
-        LOGGER.debug("Adding listener");
+        LOGGER.trace("Adding listener");
         addMessagePostedListener(new HommeMessagePostedListener(this));
     }
     
@@ -44,8 +43,8 @@ public class HommeBot extends SingleChannelBotService {
         sendDirectMessage(event.getSender(), response);
     }
 
-    private String unknownCommand() {
-        return "I'm sorry I don't understand that command - try \"help\"";
+    private String unknownCommand() throws BotException {
+        return getProperty("unknown-command");
     }
 
     private String getScorecard() {

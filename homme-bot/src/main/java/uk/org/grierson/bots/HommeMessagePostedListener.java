@@ -13,7 +13,7 @@ public class HommeMessagePostedListener extends MessagePostedListener {
 
     public HommeMessagePostedListener(HommeBot bot) {
         super(bot);
-        LOGGER.debug("Added as a listener"); 
+        LOGGER.trace("Added as a listener"); 
     }
 
     @Override
