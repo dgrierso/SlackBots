@@ -28,7 +28,7 @@ public class HommeMessagePostedListener extends MessagePostedListener {
                 ((HommeBot) bot).processDirectMessage(event);
             }
             catch ( BotException e ) {
-                LOGGER.error("Unable to send a message to [" + event.getSender().getRealName() + "]"); 
+                LOGGER.error("Unable to send a message to [" + event.getSender().getRealName() + "]", e); 
             }
             
             return;
