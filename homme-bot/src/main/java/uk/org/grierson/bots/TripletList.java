@@ -30,18 +30,20 @@ public class TripletList {
         }
         catch ( FileNotFoundException e ) {
             LOGGER.error("Unable to load existing triplets - starting with none", e);
-        }       
+        }   
+        
+        internalTripletList.add("how");
     }
     
-    public boolean isMatchingTriplet(String str) {
-        if ( str == null ) {
+    public boolean containsMatchingTriplet(String str) {
+        if ( str == null || str.length() == 0 ) {
             return false;
         }
         
         Iterator<String> iter = internalTripletList.iterator();
         
         while ( iter.hasNext() ) { 
-            if ( str.equals(iter.next()) ) {
+            if ( str.contains(iter.next()) ) {
                 return true;
             }
         }

@@ -7,12 +7,15 @@ import org.apache.logging.log4j.Logger;
 
 import com.bskyb.cbs.sdlc.bots.BotException;
 import com.bskyb.cbs.sdlc.bots.SingleChannelBotService;
+
 import com.ullink.slack.simpleslackapi.events.SlackMessagePosted;
 
 public class HommeBot extends SingleChannelBotService {
     private static final String HOMME_PROPERTIES_FILE = "src/main/resources/homme.properties";
     private static final Logger LOGGER = LogManager.getLogger(HommeBot.class);
-    
+    private static TripletList triplets = TripletList.TRIPLETS;
+    private static Scorecard scorecard = Scorecard.SCORES;
+
     public HommeBot(String channel) throws BotException {
         super(channel, Paths.get(HOMME_PROPERTIES_FILE));
         
@@ -21,13 +24,22 @@ public class HommeBot extends SingleChannelBotService {
         addMessagePostedListener(new HommeMessagePostedListener(this));
     }
     
-    public boolean messageContainsTriplet(String message) {
-        return message.contains("how");
+    public void processChannelMessage(SlackMessagePosted event) {
+        String message = event.getMessageContent();
+
+        if ( triplets.containsMatchingTriplet(message) ) {
+            this.sendMessage("[Hiccup]");
+            
+            if ( message.length() == 3 ) {
+                // got a winner so assign points to the winner
+                scorecard.addScore(event.getSender(), 1.1);
+            }
+        }
     }
 
     public void processDirectMessage(SlackMessagePosted event) throws BotException {
         String message = event.getMessageContent();
-        String response = "";
+        String response;
         
         switch ( message ) {
             case "help" :
@@ -48,8 +60,7 @@ public class HommeBot extends SingleChannelBotService {
     }
 
     private String getScorecard() {
-        // TODO Auto-generated method stub
-        return "This will return a scorecard";
+        return scorecard.toString();
     }
 
     private String getHelp() throws BotException {

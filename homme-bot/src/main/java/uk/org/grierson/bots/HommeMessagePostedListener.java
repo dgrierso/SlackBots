@@ -21,6 +21,7 @@ public class HommeMessagePostedListener extends MessagePostedListener {
         LOGGER.trace("Received message posted event");
         LOGGER.trace("Channel == [" + event.getChannel().getName() + "]");
 
+        // For direct messages we use the processDirectMessage() method.
         if ( event.getChannel().isDirect() ) {
             LOGGER.debug("Got a direct message from [" + event.getSender().getRealName() + "]");
             
@@ -34,13 +35,9 @@ public class HommeMessagePostedListener extends MessagePostedListener {
             return;
         }
             
-        // Only process events from the correct channel for this bot. 
-        if ( ! event.getChannel().getName().equals(bot.getChannel().getName()) ) {
-            return;
-        }
-        
-        // Ignore our own messages;
-        if ( event.getSender().getId().equals(session.sessionPersona().getId()) ) {
+        // Only process events from the correct channel for this bot and ignore our own messages.
+        if ( ! event.getChannel().getName().equals(bot.getChannel().getName()) || 
+             event.getSender().getId().equals(session.sessionPersona().getId()) ) {
             return;
         }
         
@@ -50,8 +47,6 @@ public class HommeMessagePostedListener extends MessagePostedListener {
         LOGGER.trace("Sender == [" + sender.getId() + "]");
         LOGGER.trace("Received Message == [" + message + "]");
         
-        if ( ((HommeBot) bot).messageContainsTriplet(message) ) {
-            bot.sendMessage("[Hiccup]");
-        }
+        ((HommeBot) bot).processChannelMessage(event);
     }
 }

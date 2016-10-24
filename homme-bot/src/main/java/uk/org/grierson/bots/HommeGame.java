@@ -7,18 +7,10 @@ import com.bskyb.cbs.sdlc.bots.*;
 
 public class HommeGame {
     private static final Logger LOGGER = LogManager.getLogger(HommeGame.class);
-    private static TripletList triplets = TripletList.TRIPLETS;
     
     public static void main(String[] args) {
         LOGGER.info("Starting HommeGame");
 
-        try {
-            triplets.isMatchingTriplet("foo");
-        }
-        catch ( Exception e ) {
-            LOGGER.debug(e);
-        }
-        
         try {
             HommeBot bot = new HommeBot("webhook-test");
 
