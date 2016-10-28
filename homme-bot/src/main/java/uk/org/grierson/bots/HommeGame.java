@@ -8,6 +8,10 @@ import com.bskyb.cbs.sdlc.bots.*;
 public class HommeGame {
     private static final Logger LOGGER = LogManager.getLogger(HommeGame.class);
     
+    private HommeGame() { 
+        // Prevent the instantiation of HommeGame objects.
+    }
+    
     public static void main(String[] args) {
         LOGGER.info("Starting HommeGame");
 
