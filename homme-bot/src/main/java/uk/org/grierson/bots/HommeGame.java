@@ -16,7 +16,7 @@ public class HommeGame {
         LOGGER.info("Starting HommeGame");
 
         try {
-            HommeBot bot = new HommeBot("webhook-test");
+            HommeBot bot = new HommeBot();
 
             while ( bot.isRunning() ) {
                 Thread.sleep(100);

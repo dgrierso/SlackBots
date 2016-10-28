@@ -16,19 +16,23 @@ public class HommeBot extends SingleChannelBotService {
     private static TripletList triplets = TripletList.TRIPLETS;
     private static Scorecard scorecard = Scorecard.SCORES;
 
-    public HommeBot(String channel) throws BotException {
-        super(channel, Paths.get(HOMME_PROPERTIES_FILE));
+    public HommeBot() throws BotException {
+        super(null, Paths.get(HOMME_PROPERTIES_FILE));
         
-        LOGGER.info("Started HommeBot on [" + channel + "]");
+        //LOGGER.info("Started HommeBot on [" + channel + "]");
         LOGGER.trace("Adding listener");
         addMessagePostedListener(new HommeMessagePostedListener(this));
+        
+        LOGGER.info("Game started");
     }
     
     public void processChannelMessage(SlackMessagePosted event) {
         String message = event.getMessageContent();
 
         if ( triplets.containsMatchingTriplet(message) ) {
+            LOGGER.debug("Got a triplet from [" + message + "]");
             this.sendMessage("[Hiccup]");
+            LOGGER.trace("Sent hiccup");
             
             if ( message.length() == 3 ) {
                 // got a winner so assign points to the winner
@@ -45,9 +49,17 @@ public class HommeBot extends SingleChannelBotService {
             case "help" :
                 response = getHelp();
                 break;
+                
             case "scorecard" :
                 response = getScorecard();
                 break;
+                
+            case "shutdown" :
+                response = "Bye, bye!";
+                LOGGER.info("Shutting down due to command from " + event.getSender().getRealName());
+                this.shutdown();
+                break;
+                
             default:
                 response = unknownCommand();
         }

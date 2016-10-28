@@ -14,7 +14,7 @@ public class TripletList {
     private static final Logger LOGGER = LogManager.getLogger(TripletList.class);
     public static final TripletList TRIPLETS = new TripletList();
     
-    private List<String> internalTripletList = new LinkedList<String>();
+    private List<String> internalTripletList = new LinkedList<>();
     
     private TripletList() { 
         loadExistingTriplets();

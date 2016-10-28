@@ -17,14 +17,14 @@ public class Scorecard {
     
     public void addScore(SlackUser user, double d) {
         LOGGER.trace("Adding score [" + d + "] to user [" + user.getRealName() + "]");
-        
         internalScorecard.compute(user, (k,v) -> v == null ? d : v + d);
+        LOGGER.trace("Score is now: [" + internalScorecard.get(user) + "]");
     }
     
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
-        str.append("Here's your scorecard\n");
+        str.append("\n");
         
         Iterable<SlackUser> iter = internalScorecard.keySet();
         
