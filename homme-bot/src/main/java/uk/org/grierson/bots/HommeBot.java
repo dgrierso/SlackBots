@@ -19,7 +19,6 @@ public class HommeBot extends SingleChannelBotService {
     public HommeBot() throws BotException {
         super(null, Paths.get(HOMME_PROPERTIES_FILE));
         
-        //LOGGER.info("Started HommeBot on [" + channel + "]");
         LOGGER.trace("Adding listener");
         addMessagePostedListener(new HommeMessagePostedListener(this));
         
